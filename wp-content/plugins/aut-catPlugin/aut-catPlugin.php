@@ -20,7 +20,9 @@ class MeuPluginContato
 
     private $flag = true;
 
-    public function __construct()
+
+
+    public function register()
     {
         // Registre os hooks de ativação e desativação
         register_activation_hook(__FILE__, array($this, 'ativar'));
@@ -52,6 +54,7 @@ class MeuPluginContato
 
         // Registre ação para enviar e-mail após o armazenamento da mensagem
         // add_action('mensagem_armazenada', array($this, 'enviar_email_apos_armazenamento'));
+
     }
 
     public function ativar()
@@ -415,5 +418,6 @@ class MeuPluginContato
 
 if (class_exists('MeuPluginContato')) {
     // Instancie a classe do plugin
-    $meuPluginContato = new MeuPluginContato();
+    $aut = new MeuPluginContato();
+    $aut->register();
 }

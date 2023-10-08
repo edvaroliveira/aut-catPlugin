@@ -1,0 +1,19 @@
+{
+  "name": "edvar/aut-cat-plugin",
+  "description": "CAT Plugin for Wordpress",
+  "type": "project",
+  "license": "GPL",
+  "autoload": {
+    "psr-4": {
+      "AutCatPlugin\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Edvar Oliveira",
+      "email": "edvaroliveira@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
+}

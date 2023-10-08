@@ -1,0 +1,21 @@
+/* Estilos para a tabela DataTables */
+#mensagens-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+#mensagens-table th, #mensagens-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Estilos para o botão de deletar */
+.delete-button {
+  background-color: #ff3333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
