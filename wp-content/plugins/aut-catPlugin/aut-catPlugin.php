@@ -110,6 +110,10 @@ class MeuPluginContato
         }
         wp_enqueue_script('jquery');
         wp_enqueue_script('datatables', 'https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js', array('jquery'), '1.11.6', true);
+        wp_enqueue_script('moment-js', plugins_url('js/moment.js', __FILE__));
+
+        wp_enqueue_script('moment-timezone-js', plugins_url('js/moment-timezone-with-data.min.js', __FILE__));
+
         wp_enqueue_style('datatables-style', 'https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css');
         wp_enqueue_style('custom-css', plugins_url('css/custom.css', __FILE__));
     }
@@ -227,6 +231,8 @@ class MeuPluginContato
     {
         // Código para criar o formulário de contato
         ob_start();
+        date_default_timezone_set('America/Sao_Paulo');
+        // add_action('wp_enqueue_scripts', 'carregar_moment_js');
 ?>
         <style>
             /* Estilize os campos de entrada */
@@ -299,11 +305,12 @@ class MeuPluginContato
         </style>
 
         <div id="formulario-contato">
+
             <form id="form-contato" action="" method="post">
                 <input type="hidden" name="action" value="enviar_contato">
 
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" required><br>
+                <input type="text" name="nome"><br>
 
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" required><br>
@@ -312,8 +319,8 @@ class MeuPluginContato
                 <input type="tel" name="telefone"><br>
 
                 <!-- Campos ocultos para created_at e updated_at -->
-                <input type="hidden" name="created_at" id="created_at" value="">
-                <input type="hidden" name="updated_at" id="updated_at" value="">
+                <input type="hidden" name="created_at" id="created_at" value=" <?= date('Y-m-d H:i:s'); ?>">
+                <input type="hidden" name="updated_at" id="updated_at" value=" <?= date('Y-m-d H:i:s'); ?>">
                 <div class="form-submit-container">
                     <input type="submit" value="Enviar">
                 </div>
@@ -327,8 +334,14 @@ class MeuPluginContato
                 $('#form-contato').on('submit', function(e) {
                     e.preventDefault();
 
+                    // Configure o fuso horário para Brasília (BRT)
+                    moment.tz.setDefault("America/Sao_Paulo");
+
+                    // Obtenha a hora local atual de Brasília
+                    var now = moment().format();
+
                     // Defina os valores para created_at e updated_at
-                    var now = new Date().toISOString();
+                    // var now = new Date().toISOString();
                     $('#created_at').val(now);
                     $('#updated_at').val(now);
 
